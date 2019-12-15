@@ -17,9 +17,11 @@
           var query = window.location.search;
           var logoutIdQuery = query && query.toLowerCase().indexOf('?logoutid=') == 0 && query;
 
-          const response = await fetch('http://localhost:5000/api/authenticate/logout' + logoutIdQuery, {
-            credentials: 'include'
-          });
+          const response = await fetch(
+            'http://localhost:5000/api/authenticate/logout' +
+            logoutIdQuery, {
+              credentials: 'include'
+            });
 
           const data = await response.json();
 

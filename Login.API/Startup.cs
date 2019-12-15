@@ -49,7 +49,7 @@ namespace Login.API
                     policy
                         .AllowAnyHeader()
                         .AllowAnyMethod()
-                        .WithOrigins("http://localhost:8080")
+                        .WithOrigins("http://192.168.0.117:8080")
                         .AllowCredentials();
                 });
             });

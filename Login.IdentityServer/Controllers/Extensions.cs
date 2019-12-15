@@ -1,5 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using IdentityServer4.Stores;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace IdentityServer.Controllers
 {
@@ -20,6 +25,26 @@ namespace IdentityServer.Controllers
             }
 
             return false;
+        }
+
+        public static void AddCertificateFromFile(this IIdentityServerBuilder builder, IConfigurationSection options, ILogger logger)
+        {
+            var path = "";
+            var keyFilePath = options.GetValue<string>(path);
+            var keyFilePassword = options.GetValue<string>("ApnePassword");
+
+            if (File.Exists(keyFilePath))
+            {
+                logger.LogDebug($"SigninCredentialExtension adding key from file {keyFilePath}");
+
+                // You can simply add this line in the Startup.cs if you don't want an extension. 
+                // This is neater though ;)
+                builder.AddSigningCredential(new X509Certificate2(keyFilePath, keyFilePassword));
+            }
+            else
+            {
+                logger.LogError($"SigninCredentialExtension cannot find key file {keyFilePath}");
+            }
         }
     }
 }

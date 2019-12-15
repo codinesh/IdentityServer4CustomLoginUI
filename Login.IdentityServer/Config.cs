@@ -43,9 +43,9 @@ namespace IdentityServer
                     AllowOfflineAccess = true,
                     RequireClientSecret = false,
                     RequireConsent = false,
-                    RedirectUris = { "http://localhost:8080/callback.html" },
-                    AllowedCorsOrigins = { "http://localhost:8080" },
-                    PostLogoutRedirectUris = { "http://localhost:8080/index.html" },
+                    RedirectUris = { "http://192.168.0.117:8080/callback.html" },
+                    AllowedCorsOrigins = { "http://192.168.0.117:8080" },
+                    PostLogoutRedirectUris = { "http://192.168.0.117:8080/index.html" },
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,

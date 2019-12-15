@@ -3,6 +3,9 @@
 
 
 using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using IdentityServer4;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace IdentityServer
 {
@@ -44,39 +48,34 @@ namespace IdentityServer
                 {
                     policy.AllowAnyHeader();
                     policy.AllowAnyMethod();
-                    policy.WithOrigins("http://localhost:8080");
+                    policy.WithOrigins("http://192.168.0.117:8080");
                     policy.AllowCredentials();
                 });
             });
 
             var builder = services.AddIdentityServer(options =>
             {
-                options.UserInteraction.LoginUrl = "http://localhost:8080/login.html";
-                options.UserInteraction.ErrorUrl = "http://localhost:8080/error.html";
-                options.UserInteraction.LogoutUrl = "http://localhost:8080/logout.html";
+                options.UserInteraction.LoginUrl = "http://192.168.0.117:8080/login.html";
+                options.UserInteraction.ErrorUrl = "http://192.168.0.117:8080/error.html";
+                options.UserInteraction.LogoutUrl = "http://192.168.0.117:8080/logout.html";
 
                 if (!string.IsNullOrEmpty(Configuration["Issuer"]))
                 {
                     options.IssuerUri = Configuration["Issuer"];
                 }
-            })
-                .AddInMemoryIdentityResources(Config.GetIdentityResources())
+            }).AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApis())
                 .AddInMemoryClients(Config.GetClients())
                 .AddTestUsers(Config.GetTestUsers());
 
-            if (Environment.IsDevelopment())
-            {
-                builder.AddDeveloperSigningCredential();
-            }
-            else
-            {
-                throw new Exception("need to configure key material");
-            }
+            builder.AddSigningCredential(new X509Certificate2(Path.Join(Environment.WebRootPath, "IdentityServer4Auth.pfx"), "ApnePassword"));
+            //builder.AddCertificateFromFile(Configuration.GetSection("SigninKeyCredentials"), new LoggerFactory().CreateLogger<Startup>());
+            //builder.AddSigningCredential(new SigningCredentials(new RsaSecurityKey(new RSACryptoServiceProvider(2048)), SecurityAlgorithms.RsaSha256Signature));
+
 
             var cors = new DefaultCorsPolicyService(new LoggerFactory().CreateLogger<DefaultCorsPolicyService>())
             {
-                AllowedOrigins = { "http://localhost:8080"},
+                AllowedOrigins = { "http://192.168.0.117:8080"},
                 AllowAll = true,
                 
             };
@@ -101,6 +100,6 @@ namespace IdentityServer
             {
                 endpoints.MapDefaultControllerRoute();
             });
-        }
+        }        
     }
 }

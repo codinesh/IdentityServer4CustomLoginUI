@@ -68,7 +68,6 @@ namespace IdentityServer.Controllers
                 await HttpContext.SignOutAsync();
             }
 
-            // no external signout supported for now (see \Quickstart\Account\AccountController.cs TriggerExternalSignout)
             return Ok(new
             {
                 showSignoutPrompt,

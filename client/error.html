@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Error :(</title>
-  </head>
-  <body>
-    <h2>Error</h2>
-    <div id="error"><div>
 
-    <script>
-      async function getError() {
-        var query = window.location.search;
-        var errorIdQuery = query && query.toLowerCase().indexOf('?errorid=') == 0 && query;
+<head>
+  <meta charset="utf-8">
+  <title>Error :(</title>
+</head>
 
-        const response = await fetch('http://localhost:5000/api/authenticate/error' + errorIdQuery, {
-          credentials: 'include'
-        });
+<body>
+  <h2>Error</h2>
+  <div id="error">
+    <div>
 
-        const data = await response.text();
+      <script>
+        async function getError() {
+          var query = window.location.search;
+          var errorIdQuery = query && query.toLowerCase().indexOf('?errorid=') == 0 && query;
+          debugger
 
-        document.getElementById('error').innerText = data;
-      }
+          const response = await fetch(
+            'http://localhost:5000/api/authenticate/error' +
+            errorIdQuery, {
+              credentials: 'include'
+            });
+          debugger
 
-      getError();
-    </script>
-  </body>
+          const data = await response.text();
+          debugger
+          console.log('error:' + data)
+          document.getElementById('error').innerText = data;
+        }
+
+        getError();
+      </script>
+</body>
+
 </html>
