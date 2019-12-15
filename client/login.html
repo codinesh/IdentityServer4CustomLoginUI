@@ -23,10 +23,10 @@
             const returnUrl = getQueryVariable('ReturnUrl')
             const username = document.getElementById('username').value
             const password = document.getElementById('password').value
-
+            debugger
             // call the API
             const response = await fetch(
-                'http://localhost:5000/api/authenticate', {
+                'http://loginidentityserver-513494917.ap-south-1.elb.amazonaws.com/api/authenticate', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -58,7 +58,7 @@
         </button>
 
         <a class="btn btn-default"
-            href="http://localhost:5000/External/Challenge?provider=Google&amp;returnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dmvc%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A5002%252Fsignin-oidc%26response_type%3Dcode%26scope%3Dopenid%2520profile%26code_challenge%3DQ_ooRiTURi-NoTzZgpN_igXOQ4feelgyZesyxnrf6nQ%26code_challenge_method%3DS256%26response_mode%3Dform_post%26nonce%3D637116862201988205.YjZhMGU3OTYtNDM3Yy00NDgxLWI2OGUtYmRlYjcxM2FhMzU5MTg2MGRmMDAtM2Y5Ny00NDg2LWE3MjItNjQ0YWIwYTA4YTA2%26state%3DCfDJ8Cv_Gnup04JNszIVzV-2sPz-thC-9xSQQC4cNu4XlyyRckiovVM5sIWvk8seo7pDcJTk4FrmXY8Ruvyj5qrCAZbrWj28eMEA82WSxyxcunz63WZ6NP-k8HM6vz2SxkQ7odQMPRIHxCfEw4dxI-XU_xOmPQr6ibyl1mETpwNR1qWlp5146DD8kivn1z2n2s78kwzddgcEwhKiZCQJlCgj_tOJ6kbk63MvJiG9yoluRrd_ursmnmJY6HesuxDsmwsTp_muIuxxFEo-YydvXT9VnxpJogstcMWSu0CxXRRUyCkKHTipH2g0Ywky6yqJADlCyZTzGmVqh-DTf9QzCSRiy7rKWY9RpU4XwbQo9mfzxsvMaMgSK_yRDEbR4FKrW0fGvA%26x-client-SKU%3DID_NETSTANDARD2_0%26x-client-ver%3D5.5.0.0">
+            href="http://loginidentityserver-513494917.ap-south-1.elb.amazonaws.com/External/Challenge?provider=Google&amp;returnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dmvc%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A5002%252Fsignin-oidc%26response_type%3Dcode%26scope%3Dopenid%2520profile%26code_challenge%3DQ_ooRiTURi-NoTzZgpN_igXOQ4feelgyZesyxnrf6nQ%26code_challenge_method%3DS256%26response_mode%3Dform_post%26nonce%3D637116862201988205.YjZhMGU3OTYtNDM3Yy00NDgxLWI2OGUtYmRlYjcxM2FhMzU5MTg2MGRmMDAtM2Y5Ny00NDg2LWE3MjItNjQ0YWIwYTA4YTA2%26state%3DCfDJ8Cv_Gnup04JNszIVzV-2sPz-thC-9xSQQC4cNu4XlyyRckiovVM5sIWvk8seo7pDcJTk4FrmXY8Ruvyj5qrCAZbrWj28eMEA82WSxyxcunz63WZ6NP-k8HM6vz2SxkQ7odQMPRIHxCfEw4dxI-XU_xOmPQr6ibyl1mETpwNR1qWlp5146DD8kivn1z2n2s78kwzddgcEwhKiZCQJlCgj_tOJ6kbk63MvJiG9yoluRrd_ursmnmJY6HesuxDsmwsTp_muIuxxFEo-YydvXT9VnxpJogstcMWSu0CxXRRUyCkKHTipH2g0Ywky6yqJADlCyZTzGmVqh-DTf9QzCSRiy7rKWY9RpU4XwbQo9mfzxsvMaMgSK_yRDEbR4FKrW0fGvA%26x-client-SKU%3DID_NETSTANDARD2_0%26x-client-ver%3D5.5.0.0">
             Google
         </a>
     </form>

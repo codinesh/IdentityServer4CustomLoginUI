@@ -18,7 +18,7 @@
           var logoutIdQuery = query && query.toLowerCase().indexOf('?logoutid=') == 0 && query;
 
           const response = await fetch(
-            'http://localhost:5000/api/authenticate/logout' +
+            'http://loginidentityserver-513494917.ap-south-1.elb.amazonaws.com/api/authenticate/logout' +
             logoutIdQuery, {
               credentials: 'include'
             });
